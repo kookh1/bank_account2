@@ -1,14 +1,65 @@
 #include<iostream>
 using namespace std;
 
+/*고객 정보 관련 데이터*/
+struct Account  
+{
+	int accId;   //계좌번호
+	int balance; //잔액
+	char *name;  //이름
+};
+
+
+struct Account accArr[100];  //고객 정보 저장 배열
+int accNum = 0;              //계좌 개수
+
+
+/*고객 정보 관련 함수*/
+int GetAccId();             //계좌ID 가져오기
+int GetBalance();           //잔액 불러오기
+void SetBalance(int money); //입금하기
+
+
+/*은행 계좌 관리 기능*/
+void ShowMenu();       //메뉴 출력
+void MakeAccount();    //계좌 만들기
+void Deposit();        //입금
+void Withdraw();       //출금
+void ShowAllAccount(); //모든 계좌 출력
+
+
 int main()
 {
-	int num;
-	cin >> num;
-
-	for (int i = 0; i < num; i++)
+	while (1)
 	{
-		cout << "Hello World!" << endl;
+		cout << "------Menu-----" << endl;
+		cout << "1. 계좌개설" << endl;
+		cout << "2. 입금" << endl;
+		cout << "3. 출금" << endl;
+		cout << "4. 계좌정보 전체 출력" << endl;
+		cout << "5. 프로그램 종료" << endl;
+		int sel;
+		cout << "선택: ";
+		cin >> sel;
+
+		switch (sel)
+		{
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			cout << "프로그램을 종료합니다." << endl;
+			return 0;
+		default:
+			cout << "잘못된 입력입니다." << endl;
+		}
+		cout << endl;
 	}
+
 	return 0;
 }
