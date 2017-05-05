@@ -31,6 +31,41 @@ void Withdraw();       //출금
 void ShowAllAccount(); //모든 계좌 출력
 
 
+//계좌 만들기
+void MakeAccount()
+{
+	cout << endl << "[계좌개설]" << endl;
+
+	Account myAcc;
+	int accID;
+	cout << "계좌ID: ";
+	cin >> myAcc.accId;
+
+	cout << "이름: ";
+	cin >> myAcc.name;
+
+	cout << "입금액: ";
+	cin >> myAcc.balance;
+
+	accArr[accNum++] = myAcc;  //계좌 1개를 만들어서 계좌 저장소에 저장
+	cout << "계좌가 개설되었습니다." << endl;
+}
+
+
+//모든 계좌 출력
+void ShowAllAccount()
+{
+	for (int i = 0; i < accNum; i++)
+	{
+		cout << endl<<"[num : " << i + 1 <<" ]"<< endl;
+		cout << "계좌ID: " << accArr[i].accId << endl;
+		cout << "이름: " << accArr[i].name << endl;
+		cout << "입금액: " << accArr[i].balance << endl<<endl;
+	}
+}
+
+
+
 int main()
 {
 	while (1)
@@ -55,6 +90,7 @@ int main()
 		case WITHDRAW:
 			break;
 		case SHOW:
+			ShowAllAccount();
 			break;
 		case EXIT:
 			cout << "프로그램을 종료합니다." << endl;
@@ -68,23 +104,3 @@ int main()
 	return 0;
 }
 
-
-//계좌 만들기
-void MakeAccount()
-{
-	cout << endl<<"[계좌개설]" << endl;
-
-	Account myAcc;
-	int accID;
-	cout << "계좌ID: ";
-	cin >> myAcc.accId;
-
-	cout << "이름: ";
-	cin >> myAcc.name;
-
-	cout << "입금액: ";
-	cin >> myAcc.balance;
-
-	accArr[accNum++] = myAcc;  //계좌 1개를 만들어서 계좌 저장소에 저장
-	cout << "계좌가 개설되었습니다." << endl;
-}
