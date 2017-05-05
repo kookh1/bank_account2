@@ -10,7 +10,7 @@ struct Account
 {
 	int accId;   //계좌번호
 	int balance; //잔액
-	char *name;  //이름
+	char name[20];  //이름
 };
 
 struct Account accArr[100];  //고객 정보 저장 배열
@@ -48,6 +48,7 @@ int main()
 		switch (sel)
 		{
 		case MAKE:
+			MakeAccount();
 			break;
 		case DEPOSIT:
 			break;
@@ -65,4 +66,25 @@ int main()
 	}
 
 	return 0;
+}
+
+
+//계좌 만들기
+void MakeAccount()
+{
+	cout << endl<<"[계좌개설]" << endl;
+
+	Account myAcc;
+	int accID;
+	cout << "계좌ID: ";
+	cin >> myAcc.accId;
+
+	cout << "이름: ";
+	cin >> myAcc.name;
+
+	cout << "입금액: ";
+	cin >> myAcc.balance;
+
+	accArr[accNum++] = myAcc;  //계좌 1개를 만들어서 계좌 저장소에 저장
+	cout << "계좌가 개설되었습니다." << endl;
 }
