@@ -1,6 +1,10 @@
 #include<iostream>
 using namespace std;
 
+
+/* constant 정보 */
+enum{MAKE=1, DEPOSIT, WITHDRAW, SHOW, EXIT};
+
 /*고객 정보 관련 데이터*/
 struct Account  
 {
@@ -8,7 +12,6 @@ struct Account
 	int balance; //잔액
 	char *name;  //이름
 };
-
 
 struct Account accArr[100];  //고객 정보 저장 배열
 int accNum = 0;              //계좌 개수
@@ -44,15 +47,15 @@ int main()
 
 		switch (sel)
 		{
-		case 1:
+		case MAKE:
 			break;
-		case 2:
+		case DEPOSIT:
 			break;
-		case 3:
+		case WITHDRAW:
 			break;
-		case 4:
+		case SHOW:
 			break;
-		case 5:
+		case EXIT:
 			cout << "프로그램을 종료합니다." << endl;
 			return 0;
 		default:
