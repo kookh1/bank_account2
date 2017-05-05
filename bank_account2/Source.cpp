@@ -17,11 +17,6 @@ struct Account accArr[100];  //고객 정보 저장 배열
 int accNum = 0;              //계좌 개수
 
 
-/*고객 정보 관련 함수*/
-int GetAccId();             //계좌ID 가져오기
-int GetBalance();           //잔액 불러오기
-void SetBalance(int money); //입금하기
-
 
 /*은행 계좌 관리 기능*/
 void ShowMenu();       //메뉴 출력
@@ -65,12 +60,36 @@ void MakeAccount()
 }
 
 
+//입금
+void Deposit()
+{
+	cout << endl<<"[입 금]" << endl;
+	
+	int accID;   //계좌ID
+	cout << "계좌ID: ";
+	cin >> accID;
+
+	for (int i = 0; i < accNum; i++)
+	{
+		if (accArr[i].accId == accID)
+		{
+			int deposit;  //입금액
+			cout << "입금액: ";
+			cin >> deposit;
+			accArr[i].balance += deposit;
+			return;
+		}
+	}
+	cout << "해당 계좌ID가 존재하지 않습니다." << endl;
+}
+
+
 //모든 계좌 출력
 void ShowAllAccount()
 {
 	for (int i = 0; i < accNum; i++)
 	{
-		cout << endl<<"[num : " << i + 1 <<" ]"<< endl;
+		cout << endl<<"[NUM : " << i + 1 <<" ]"<< endl;
 		cout << "계좌ID: " << accArr[i].accId << endl;
 		cout << "이름: " << accArr[i].name << endl;
 		cout << "입금액: " << accArr[i].balance << endl<<endl;
@@ -93,6 +112,7 @@ int main()
 			MakeAccount();  //계좌만들기
 			break;
 		case DEPOSIT:
+			Deposit();     //입금하기
 			break;
 		case WITHDRAW:
 			break;
