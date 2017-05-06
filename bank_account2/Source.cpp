@@ -111,7 +111,6 @@ void Deposit()
 			int money;  //입금액
 			cout << "입금액: ";
 			cin >> money;
-			//accArr[i]->balance += money;
 			accArr[i]->SetMoney(money);
 			cout << "입금완료" << endl;
 			return;
@@ -137,7 +136,6 @@ void Withdraw()
 			int money;  //출금액
 			cout << "출금액: ";
 			cin >> money;
-			//accArr[i]->balance -= money;
 			accArr[i]->GetMoney(money);
 			cout << "출금완료" << endl;
 			return;
@@ -183,6 +181,8 @@ int main()
 			ShowAllAccount();  //모든계좌출력
 			break;
 		case EXIT:
+			for (int i = 0; i < accNum; i++)  //객체 메모리 해제
+				delete accArr[i];
 			cout << "프로그램을 종료합니다." << endl;
 			return 0;
 		default:
