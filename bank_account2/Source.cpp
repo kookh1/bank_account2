@@ -11,13 +11,18 @@ class Account
 public:  //temporary!!!
 	int accId;   //계좌번호
 	int balance; //잔액
-	char name[20];  //이름
+	char *name;  //이름
 
 public:
 	Account(int accId, int balance, char *name)  //생성자
 		: accId(accId), balance(balance)
 	{
+		this->name = new char[strlen(name) + 1];  //이름 동적할당
 		strcpy(this->name, name);
+	}
+	~Account()  //소멸자
+	{
+		delete[] name;  //이름 동적할당 해제
 	}
 };
 
