@@ -1,4 +1,5 @@
 #include<iostream>
+#include<cstring>
 using namespace std;
 
 
@@ -6,14 +7,46 @@ using namespace std;
 enum{MAKE=1, DEPOSIT, WITHDRAW, SHOW, EXIT};
 
 /*고객 정보 관련 데이터*/
-struct Account  
+class Account  
 {
+private:     
 	int accId;   //계좌번호
 	int balance; //잔액
-	char name[20];  //이름
+	char *name;  //이름
+
+public:
+	Account(int accId, int balance, char *name)  //생성자
+		: accId(accId), balance(balance)
+	{
+		this->name = new char[strlen(name) + 1];  //이름 동적할당
+		strcpy(this->name, name);
+	}
+	~Account()  //소멸자
+	{
+		delete[] name;  //이름 동적할당 해제
+	}
+	int GetAccId() const  //계좌ID 반환
+	{
+		return accId;
+	}
+	int GetMoney(int money)  //출금
+	{
+		this->balance -= money;
+		return balance;
+	}
+	void SetMoney(int money) //입금
+	{
+		this->balance += money;
+	}
+	void ShowAccount() const  //계좌정보 출력
+	{
+		cout << "계좌ID: " << accId << endl;
+		cout << "이름: " << name << endl;
+		cout << "입금액: " << balance << endl << endl;
+	}
 };
 
-struct Account accArr[100];  //고객 정보 저장 배열
+Account *accArr[100];  //고객 정보 저장 배열
 int accNum = 0;              //계좌 개수
 
 
@@ -44,17 +77,19 @@ void MakeAccount()
 {
 	cout << endl << "[계좌개설]" << endl;
 
-	Account myAcc;
 	int accID;
 	cout << "계좌ID: ";
-	cin >> myAcc.accId;
+	cin >> accID;
 
+	char name[20];
 	cout << "이름: ";
-	cin >> myAcc.name;
+	cin >> name;
 
+	int money;
 	cout << "입금액: ";
-	cin >> myAcc.balance;
+	cin >> money;
 
+	Account *myAcc = new Account(accID, money, name);  //동적 객체 생성
 	accArr[accNum++] = myAcc;  //계좌 1개를 만들어서 계좌 저장소에 저장
 	cout << "계좌가 개설되었습니다." << endl;
 }
@@ -71,12 +106,12 @@ void Deposit()
 
 	for (int i = 0; i < accNum; i++)
 	{
-		if (accArr[i].accId == accID)
+		if (accArr[i]->GetAccId() == accID)
 		{
 			int money;  //입금액
 			cout << "입금액: ";
 			cin >> money;
-			accArr[i].balance += money;
+			accArr[i]->SetMoney(money);
 			cout << "입금완료" << endl;
 			return;
 		}
@@ -96,12 +131,12 @@ void Withdraw()
 
 	for (int i = 0; i < accNum; i++)
 	{
-		if (accArr[i].accId == accID)
+		if (accArr[i]->GetAccId() == accID)
 		{
 			int money;  //출금액
 			cout << "출금액: ";
 			cin >> money;
-			accArr[i].balance -= money;
+			accArr[i]->GetMoney(money);
 			cout << "출금완료" << endl;
 			return;
 		}
@@ -116,9 +151,7 @@ void ShowAllAccount()
 	for (int i = 0; i < accNum; i++)
 	{
 		cout << endl<<"[NUM : " << i + 1 <<" ]"<< endl;
-		cout << "계좌ID: " << accArr[i].accId << endl;
-		cout << "이름: " << accArr[i].name << endl;
-		cout << "입금액: " << accArr[i].balance << endl<<endl;
+		accArr[i]->ShowAccount();
 	}
 }
 
@@ -148,6 +181,8 @@ int main()
 			ShowAllAccount();  //모든계좌출력
 			break;
 		case EXIT:
+			for (int i = 0; i < accNum; i++)  //객체 메모리 해제
+				delete accArr[i];
 			cout << "프로그램을 종료합니다." << endl;
 			return 0;
 		default:
