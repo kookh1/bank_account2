@@ -1,4 +1,5 @@
 #include<iostream>
+#include<cstring>
 using namespace std;
 
 
@@ -8,7 +9,7 @@ enum{MAKE=1, DEPOSIT, WITHDRAW, SHOW, EXIT};
 /*고객 정보 관련 데이터*/
 class Account  
 {
-public:  //temporary!!!
+private:     
 	int accId;   //계좌번호
 	int balance; //잔액
 	char *name;  //이름
@@ -23,6 +24,25 @@ public:
 	~Account()  //소멸자
 	{
 		delete[] name;  //이름 동적할당 해제
+	}
+	int GetAccId() const  //계좌ID 반환
+	{
+		return accId;
+	}
+	int GetMoney(int money)  //출금
+	{
+		this->balance -= money;
+		return balance;
+	}
+	void SetMoney(int money) //입금
+	{
+		this->balance += money;
+	}
+	void ShowAccount() const  //계좌정보 출력
+	{
+		cout << "계좌ID: " << accId << endl;
+		cout << "이름: " << name << endl;
+		cout << "입금액: " << balance << endl << endl;
 	}
 };
 
@@ -86,12 +106,13 @@ void Deposit()
 
 	for (int i = 0; i < accNum; i++)
 	{
-		if (accArr[i]->accId == accID)
+		if (accArr[i]->GetAccId() == accID)
 		{
 			int money;  //입금액
 			cout << "입금액: ";
 			cin >> money;
-			accArr[i]->balance += money;
+			//accArr[i]->balance += money;
+			accArr[i]->SetMoney(money);
 			cout << "입금완료" << endl;
 			return;
 		}
@@ -111,12 +132,13 @@ void Withdraw()
 
 	for (int i = 0; i < accNum; i++)
 	{
-		if (accArr[i]->accId == accID)
+		if (accArr[i]->GetAccId() == accID)
 		{
 			int money;  //출금액
 			cout << "출금액: ";
 			cin >> money;
-			accArr[i]->balance -= money;
+			//accArr[i]->balance -= money;
+			accArr[i]->GetMoney(money);
 			cout << "출금완료" << endl;
 			return;
 		}
@@ -131,9 +153,7 @@ void ShowAllAccount()
 	for (int i = 0; i < accNum; i++)
 	{
 		cout << endl<<"[NUM : " << i + 1 <<" ]"<< endl;
-		cout << "계좌ID: " << accArr[i]->accId << endl;
-		cout << "이름: " << accArr[i]->name << endl;
-		cout << "입금액: " << accArr[i]->balance << endl<<endl;
+		accArr[i]->ShowAccount();
 	}
 }
 
