@@ -21,6 +21,12 @@ public:
 		this->name = new char[strlen(name) + 1];  //이름 동적할당
 		strcpy(this->name, name);
 	}
+	Account(const Account& ref)                 //깊은 복사 생성자 
+		:accId(ref.accId), balance(ref.balance)
+	{
+		this->name = new char[strlen(ref.name) + 1];
+		strcpy(this->name, ref.name);
+	}
 	~Account()  //소멸자
 	{
 		delete[] name;  //이름 동적할당 해제
