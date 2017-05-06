@@ -6,6 +6,10 @@ using namespace std;
 /* constant 정보 */
 enum{MAKE=1, DEPOSIT, WITHDRAW, SHOW, EXIT};
 
+const int NAME_LEN = 20;     //이름 길이
+const int ACCOUNT_LEN = 100; //계좌 개수
+
+
 /*고객 정보 관련 데이터*/
 class Account  
 {
@@ -21,29 +25,35 @@ public:
 		this->name = new char[strlen(name) + 1];  //이름 동적할당
 		strcpy(this->name, name);
 	}
+
 	Account(const Account& ref)                 //깊은 복사 생성자 
 		:accId(ref.accId), balance(ref.balance)
 	{
 		this->name = new char[strlen(ref.name) + 1];
 		strcpy(this->name, ref.name);
 	}
+
 	~Account()  //소멸자
 	{
 		delete[] name;  //이름 동적할당 해제
 	}
+
 	int GetAccId() const  //계좌ID 반환
 	{
 		return accId;
 	}
+
 	int GetMoney(int money)  //출금
 	{
 		this->balance -= money;
 		return balance;
 	}
+
 	void SetMoney(int money) //입금
 	{
 		this->balance += money;
 	}
+
 	void ShowAccount() const  //계좌정보 출력
 	{
 		cout << "계좌ID: " << accId << endl;
@@ -52,7 +62,7 @@ public:
 	}
 };
 
-Account *accArr[100];  //고객 정보 저장 배열
+Account *accArr[ACCOUNT_LEN];  //고객 정보 저장 배열
 int accNum = 0;              //계좌 개수
 
 
@@ -87,7 +97,7 @@ void MakeAccount()
 	cout << "계좌ID: ";
 	cin >> accID;
 
-	char name[20];
+	char name[NAME_LEN];
 	cout << "이름: ";
 	cin >> name;
 
@@ -152,7 +162,7 @@ void Withdraw()
 
 
 //모든 계좌 출력
-void ShowAllAccount()
+void ShowAllAccount() 
 {
 	for (int i = 0; i < accNum; i++)
 	{
