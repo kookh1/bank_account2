@@ -4,7 +4,8 @@ using namespace std;
 
 
 /* constant 정보 */
-enum{MAKE=1, DEPOSIT, WITHDRAW, SHOW, EXIT};
+enum{MAKE=1, DEPOSIT, WITHDRAW, SHOW, EXIT};  //메뉴 선택
+enum{NORMAL=1, CREDIT};   //계좌종류 선택
 
 const int NAME_LEN = 20;     //이름 길이
 const int ACCOUNT_LEN = 100; //계좌 개수
@@ -39,7 +40,7 @@ public:
 		: Account(accId, balance, name), interestRatio(ratio)
 	{}
 	
-	void ShowAccount() const  //계좌정보 출력
+	virtual void ShowAccount() const  //계좌정보 출력
 	{
 		Account::ShowAccount();
 		cout << "이자율: " << interestRatio << endl<<endl;	
@@ -106,6 +107,8 @@ public:
 	void Deposit();        //입금
 	void Withdraw();       //출금
 	void ShowAllAccount(); //모든 계좌 출력
+
+	void MakeNormalAccount();  //보통계좌 만들기
 };
 
 //empty
@@ -136,8 +139,28 @@ void ShowMenu()
 //계좌 만들기
 void AccountHandler::MakeAccount()
 {
-	cout << endl << "[계좌개설]" << endl;
+	cout << endl << "[계좌종류선택]" << endl;
+	cout <<"1.보통예금계좌 2.신용신뢰계좌" << endl;
+	int sel;
+	cout << "선택: ";
+	cin >> sel;
 
+	switch (sel)
+	{
+	case NORMAL:
+		MakeNormalAccount();
+		break;
+
+	case CREDIT:
+		
+		break;
+	}
+
+}
+
+//보통계좌 만들기
+void AccountHandler::MakeNormalAccount()
+{
 	int accID;
 	cout << "계좌ID: ";
 	cin >> accID;
@@ -154,9 +177,8 @@ void AccountHandler::MakeAccount()
 	cout << "이자율: ";
 	cin >> ratio;
 
-	Account *myAcc = new NormalAccount(accID, money, name, ratio);  
-	accArr[accNum++] = myAcc;  //계좌 1개를 만들어서 계좌 저장소에 저장
-	cout << "계좌가 개설되었습니다." << endl;
+	accArr[accNum++] = new NormalAccount(accID, money, name, ratio); 
+	cout << "보통계좌가 개설되었습니다." << endl;
 }
 
 
