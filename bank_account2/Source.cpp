@@ -6,7 +6,7 @@ using namespace std;
 /* constant 정보 */
 enum{MAKE=1, DEPOSIT, WITHDRAW, SHOW, EXIT};  //메뉴 선택
 enum{NORMAL=1, CREDIT};   //계좌종류 선택
-enum{LEVEL_A=1, LEVEL_B, LEVEL_C};  //신용등급 선택
+enum{LEVEL_A=7, LEVEL_B=4, LEVEL_C=2};  //신용등급 선택
 
 const int NAME_LEN = 20;     //이름 길이
 const int ACCOUNT_LEN = 100; //계좌 개수
@@ -241,14 +241,14 @@ void AccountHandler::MakeCreditAccount()
 
 	switch (special)
 	{
-	case LEVEL_A:
-	    accArr[accNum++] = new HighCreditAccount(accID, money, name, ratio, 7);
+	case 1:
+	    accArr[accNum++] = new HighCreditAccount(accID, money, name, ratio, LEVEL_A);
 		break;
-	case LEVEL_B:
-		accArr[accNum++] = new HighCreditAccount(accID, money, name, ratio, 4);
+	case 2:
+		accArr[accNum++] = new HighCreditAccount(accID, money, name, ratio, LEVEL_B);
 		break;
-	case LEVEL_C:
-		accArr[accNum++] = new HighCreditAccount(accID, money, name, ratio, 2);
+	case 3:
+		accArr[accNum++] = new HighCreditAccount(accID, money, name, ratio, LEVEL_C);
 		break;
 	}
 	cout << "신용신뢰계좌가 개설되었습니다." << endl;
