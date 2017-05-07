@@ -71,6 +71,8 @@ private:
 
 public:
 	/*은행 계좌 관리 기능*/
+	AccountHandler();      //empty
+	~AccountHandler();     //계좌정보 해제
 	void ShowMenu();       //메뉴 출력
 	void MakeAccount();    //계좌 만들기
 	void Deposit();        //입금
@@ -78,6 +80,16 @@ public:
 	void ShowAllAccount(); //모든 계좌 출력
 };
 
+//empty
+AccountHandler::AccountHandler()
+{}
+
+//계좌정보 해제
+AccountHandler::~AccountHandler()
+{
+	for (int i = 0; i < accNum; i++)
+		delete accArr[i];
+}
 
            
 //메뉴 출력
