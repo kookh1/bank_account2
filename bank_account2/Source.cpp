@@ -10,7 +10,7 @@ const int NAME_LEN = 20;     //이름 길이
 const int ACCOUNT_LEN = 100; //계좌 개수
 
 
-/*고객 정보 관련 데이터*/
+/*고객 계좌정보 클래스*/
 class Account  
 {
 private:     
@@ -19,14 +19,31 @@ private:
 	char *name;  //이름
 
 public:
-	Account(int accId, int balance, char *name);  //생성자
-	Account(const Account& ref);  //깊은 복사 생성자 
-	~Account();  //소멸자
+	Account(int accId, int balance, char *name);  
+	Account(const Account& ref);  
+	~Account();  
 
-	int GetAccId() const;  //계좌ID 반환
+	int GetAccId() const;     //계좌ID 반환
 	int GetMoney(int money);  //출금
 	void SetMoney(int money); //입금
-	void ShowAccount() const;  //계좌정보 출력
+	virtual void ShowAccount() const=0;//계좌정보 출력
+};
+
+/*보통계좌정보 클래스*/
+class NormalAccount : public Account
+{
+private:
+	int interestRatio;  //이자율
+public:
+	NormalAccount(int accId, int balance, char *name, int ratio) 
+		: Account(accId, balance, name), interestRatio(ratio)
+	{}
+	
+	void ShowAccount() const  //계좌정보 출력
+	{
+		Account::ShowAccount();
+		cout << "이자율: " << interestRatio << endl<<endl;	
+	}
 };
 
 Account::Account(int accId, int balance, char *name)  //생성자
@@ -68,7 +85,7 @@ void Account::ShowAccount() const  //계좌정보 출력
 {
 	cout << "계좌ID: " << accId << endl;
 	cout << "이름: " << name << endl;
-	cout << "입금액: " << balance << endl << endl;
+	cout << "입금액: " << balance << endl;
 }
 
 
@@ -133,7 +150,11 @@ void AccountHandler::MakeAccount()
 	cout << "입금액: ";
 	cin >> money;
 
-	Account *myAcc = new Account(accID, money, name);  //동적 객체 생성
+	int ratio;
+	cout << "이자율: ";
+	cin >> ratio;
+
+	Account *myAcc = new NormalAccount(accID, money, name, ratio);  
 	accArr[accNum++] = myAcc;  //계좌 1개를 만들어서 계좌 저장소에 저장
 	cout << "계좌가 개설되었습니다." << endl;
 }
