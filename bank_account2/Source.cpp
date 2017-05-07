@@ -62,19 +62,24 @@ public:
 	}
 };
 
-Account *accArr[ACCOUNT_LEN];  //고객 정보 저장 배열
-int accNum = 0;              //계좌 개수
+/*계좌정보 처리 클래스*/
+class AccountHandler
+{
+private:
+	Account *accArr[ACCOUNT_LEN];  //고객 계좌정보 저장 포인터 객체 배열
+	int accNum = 0;                //계좌 개수
+
+public:
+	/*은행 계좌 관리 기능*/
+	void ShowMenu();       //메뉴 출력
+	void MakeAccount();    //계좌 만들기
+	void Deposit();        //입금
+	void Withdraw();       //출금
+	void ShowAllAccount(); //모든 계좌 출력
+};
 
 
-
-/*은행 계좌 관리 기능*/
-void ShowMenu();       //메뉴 출력
-void MakeAccount();    //계좌 만들기
-void Deposit();        //입금
-void Withdraw();       //출금
-void ShowAllAccount(); //모든 계좌 출력
-
-
+           
 //메뉴 출력
 void ShowMenu()
 {
@@ -89,7 +94,7 @@ void ShowMenu()
 
 
 //계좌 만들기
-void MakeAccount()
+void AccountHandler::MakeAccount()
 {
 	cout << endl << "[계좌개설]" << endl;
 
@@ -112,7 +117,7 @@ void MakeAccount()
 
 
 //입금
-void Deposit()
+void AccountHandler::Deposit()
 {
 	cout << endl<<"[입 금]" << endl;
 	
@@ -137,7 +142,7 @@ void Deposit()
 
 
 //출금
-void Withdraw()
+void AccountHandler::Withdraw()
 {
 	cout << endl << "[출 금]" << endl;
 
@@ -162,7 +167,7 @@ void Withdraw()
 
 
 //모든 계좌 출력
-void ShowAllAccount() 
+void AccountHandler::ShowAllAccount()
 {
 	for (int i = 0; i < accNum; i++)
 	{
@@ -175,7 +180,7 @@ void ShowAllAccount()
 
 int main()
 {
-
+	AccountHandler ac;
 	while (1)
 	{
 		ShowMenu();   //메뉴출력
@@ -185,20 +190,18 @@ int main()
 		switch (sel)
 		{
 		case MAKE:
-			MakeAccount();  //계좌만들기
+			ac.MakeAccount();  //계좌만들기
 			break;
 		case DEPOSIT:
-			Deposit();     //입금하기
+			ac.Deposit();     //입금하기
 			break;
 		case WITHDRAW:
-			Withdraw();    //출금하기
+			ac.Withdraw();    //출금하기
 			break;
 		case SHOW:
-			ShowAllAccount();  //모든계좌출력
+			ac.ShowAllAccount();  //모든계좌출력
 			break;
 		case EXIT:
-			for (int i = 0; i < accNum; i++)  //객체 메모리 해제
-				delete accArr[i];
 			cout << "프로그램을 종료합니다." << endl;
 			return 0;
 		default:
