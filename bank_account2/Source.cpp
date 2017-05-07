@@ -43,7 +43,7 @@ public:
 	virtual void ShowAccount() const  //계좌정보 출력
 	{
 		Account::ShowAccount();
-		cout << "이자율: " << interestRatio << endl<<endl;	
+		cout << "이자율: " << interestRatio << endl;	
 	}
 
 	virtual void SetMoney(int money)   //입금
@@ -52,6 +52,30 @@ public:
 		//입금 + (입금 * 이자율)
 	}
 };
+
+/*신용신뢰 계좌정보 클래스*/
+class HighCreditAccount : public NormalAccount
+{
+private:
+	int specialRatio;  //추가 이자율
+public:
+	HighCreditAccount(int accId, int balance, char *name, int ratio, int special)
+		: NormalAccount(accId, balance, name, ratio), specialRatio(special)
+	{}
+
+	virtual void ShowAccount() const  //계좌정보 출력
+	{
+		NormalAccount::ShowAccount();
+		cout << "신용등급(1toA, 2toB, 3toC): " << specialRatio << endl << endl;
+	}
+
+	//virtual void SetMoney(int money)   //입금
+	//{
+	//	Account::SetMoney(money + money*interestRatio*0.01);
+	//	//입금 + (입금 * 이자율)
+	//}
+};
+
 
 Account::Account(int accId, int balance, char *name)
 	: accId(accId), balance(balance)
@@ -115,6 +139,7 @@ public:
 	void ShowAllAccount(); //모든 계좌 출력
 
 	void MakeNormalAccount();  //보통계좌 만들기
+	void MakeCreditAccount();  //신용신뢰계좌 만들기
 };
 
 //empty
@@ -158,7 +183,7 @@ void AccountHandler::MakeAccount()
 		break;
 
 	case CREDIT:
-		
+		MakeCreditAccount();
 		break;
 	}
 
@@ -187,6 +212,32 @@ void AccountHandler::MakeNormalAccount()
 	cout << "보통계좌가 개설되었습니다." << endl;
 }
 
+//신용신뢰계좌 만들기
+void AccountHandler::MakeCreditAccount()
+{
+	int accID;
+	cout << "계좌ID: ";
+	cin >> accID;
+
+	char name[NAME_LEN];
+	cout << "이름: ";
+	cin >> name;
+
+	int money;
+	cout << "입금액: ";
+	cin >> money;
+
+	int ratio;
+	cout << "이자율: ";
+	cin >> ratio;
+
+	int special;
+	cout << "신용등급(1toA, 2toB, 3toC): ";
+	cin >> special;
+
+	accArr[accNum++] = new HighCreditAccount(accID, money, name, ratio, special);
+	cout << "신용신뢰계좌가 개설되었습니다." << endl;
+}
 
 //입금
 void AccountHandler::Deposit()
