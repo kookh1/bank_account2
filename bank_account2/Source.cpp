@@ -19,48 +19,59 @@ private:
 	char *name;  //이름
 
 public:
-	Account(int accId, int balance, char *name)  //생성자
-		: accId(accId), balance(balance)
-	{
-		this->name = new char[strlen(name) + 1];  //이름 동적할당
-		strcpy(this->name, name);
-	}
+	Account(int accId, int balance, char *name);  //생성자
+	Account(const Account& ref);  //깊은 복사 생성자 
+	~Account();  //소멸자
 
-	Account(const Account& ref)                 //깊은 복사 생성자 
-		:accId(ref.accId), balance(ref.balance)
-	{
-		this->name = new char[strlen(ref.name) + 1];
-		strcpy(this->name, ref.name);
-	}
-
-	~Account()  //소멸자
-	{
-		delete[] name;  //이름 동적할당 해제
-	}
-
-	int GetAccId() const  //계좌ID 반환
-	{
-		return accId;
-	}
-
-	int GetMoney(int money)  //출금
-	{
-		this->balance -= money;
-		return balance;
-	}
-
-	void SetMoney(int money) //입금
-	{
-		this->balance += money;
-	}
-
-	void ShowAccount() const  //계좌정보 출력
-	{
-		cout << "계좌ID: " << accId << endl;
-		cout << "이름: " << name << endl;
-		cout << "입금액: " << balance << endl << endl;
-	}
+	int GetAccId() const;  //계좌ID 반환
+	int GetMoney(int money);  //출금
+	void SetMoney(int money); //입금
+	void ShowAccount() const;  //계좌정보 출력
 };
+
+Account::Account(int accId, int balance, char *name)  //생성자
+	: accId(accId), balance(balance)
+{
+	this->name = new char[strlen(name) + 1];  //이름 동적할당
+	strcpy(this->name, name);
+}
+
+Account::Account(const Account& ref)                 //깊은 복사 생성자 
+	:accId(ref.accId), balance(ref.balance)
+{
+	this->name = new char[strlen(ref.name) + 1];
+	strcpy(this->name, ref.name);
+}
+
+Account::~Account()  //소멸자
+{
+	delete[] name;  //이름 동적할당 해제
+}
+
+int Account::GetAccId() const  //계좌ID 반환
+{
+	return accId;
+}
+
+int Account::GetMoney(int money)  //출금
+{
+	this->balance -= money;
+	return balance;
+}
+
+void Account::SetMoney(int money) //입금
+{
+	this->balance += money;
+}
+
+void Account::ShowAccount() const  //계좌정보 출력
+{
+	cout << "계좌ID: " << accId << endl;
+	cout << "이름: " << name << endl;
+	cout << "입금액: " << balance << endl << endl;
+}
+
+
 
 /*계좌정보 처리 클래스*/
 class AccountHandler
