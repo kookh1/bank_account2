@@ -6,6 +6,7 @@ using namespace std;
 /* constant 정보 */
 enum{MAKE=1, DEPOSIT, WITHDRAW, SHOW, EXIT};  //메뉴 선택
 enum{NORMAL=1, CREDIT};   //계좌종류 선택
+enum{LEVEL_A=1, LEVEL_B, LEVEL_C};  //신용등급 선택
 
 const int NAME_LEN = 20;     //이름 길이
 const int ACCOUNT_LEN = 100; //계좌 개수
@@ -39,7 +40,10 @@ public:
 	NormalAccount(int accId, int balance, char *name, int ratio) 
 		: Account(accId, balance, name), interestRatio(ratio)
 	{}
-	
+	int GetRatio() const  //이자율 가져오기
+	{
+		return interestRatio;
+	}
 	virtual void ShowAccount() const  //계좌정보 출력
 	{
 		Account::ShowAccount();
@@ -69,11 +73,11 @@ public:
 		cout << "신용등급(1toA, 2toB, 3toC): " << specialRatio << endl << endl;
 	}
 
-	//virtual void SetMoney(int money)   //입금
-	//{
-	//	Account::SetMoney(money + money*interestRatio*0.01);
-	//	//입금 + (입금 * 이자율)
-	//}
+	virtual void SetMoney(int money)   //입금
+	{
+		Account::SetMoney(money + money*(GetRatio()+specialRatio)*0.01);
+		//입금 + (입금 * (이자율+추가이자율))
+	}
 };
 
 
@@ -235,7 +239,18 @@ void AccountHandler::MakeCreditAccount()
 	cout << "신용등급(1toA, 2toB, 3toC): ";
 	cin >> special;
 
-	accArr[accNum++] = new HighCreditAccount(accID, money, name, ratio, special);
+	switch (special)
+	{
+	case LEVEL_A:
+	    accArr[accNum++] = new HighCreditAccount(accID, money, name, ratio, 7);
+		break;
+	case LEVEL_B:
+		accArr[accNum++] = new HighCreditAccount(accID, money, name, ratio, 4);
+		break;
+	case LEVEL_C:
+		accArr[accNum++] = new HighCreditAccount(accID, money, name, ratio, 2);
+		break;
+	}
 	cout << "신용신뢰계좌가 개설되었습니다." << endl;
 }
 
