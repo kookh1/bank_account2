@@ -26,8 +26,8 @@ public:
 
 	int GetAccId() const;     //계좌ID 반환
 	int GetMoney(int money);  //출금
-	void SetMoney(int money); //입금
-	virtual void ShowAccount() const=0;//계좌정보 출력
+	virtual void SetMoney(int money) = 0; //입금
+	virtual void ShowAccount() const=0;   //계좌정보 출력
 };
 
 /*보통계좌정보 클래스*/
@@ -45,25 +45,31 @@ public:
 		Account::ShowAccount();
 		cout << "이자율: " << interestRatio << endl<<endl;	
 	}
+
+	virtual void SetMoney(int money)   //입금
+	{
+		Account::SetMoney(money+ money*interestRatio*0.01);
+		//입금 + (입금 * 이자율)
+	}
 };
 
-Account::Account(int accId, int balance, char *name)  //생성자
+Account::Account(int accId, int balance, char *name)
 	: accId(accId), balance(balance)
 {
-	this->name = new char[strlen(name) + 1];  //이름 동적할당
+	this->name = new char[strlen(name) + 1]; 
 	strcpy(this->name, name);
 }
 
-Account::Account(const Account& ref)                 //깊은 복사 생성자 
+Account::Account(const Account& ref)             
 	:accId(ref.accId), balance(ref.balance)
 {
 	this->name = new char[strlen(ref.name) + 1];
 	strcpy(this->name, ref.name);
 }
 
-Account::~Account()  //소멸자
+Account::~Account()  
 {
-	delete[] name;  //이름 동적할당 해제
+	delete[] name;  
 }
 
 int Account::GetAccId() const  //계좌ID 반환
