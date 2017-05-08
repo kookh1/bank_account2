@@ -10,14 +10,10 @@ class Account
 private:
 	int accId;   //계좌번호
 	int balance; //잔액
-	//char *name;  //이름
-	String name;
+	String name; //이름
 
 public:
 	Account(int accId, int balance, String name);
-	//Account(const Account& ref);
-	//Account& operator=(const Account& ref);  
-	//~Account();
 	
 	int GetAccId() const;     //계좌ID 반환
 	int GetMoney(int money);  //출금

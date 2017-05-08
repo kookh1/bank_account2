@@ -1,4 +1,5 @@
 #include "Account.h"
+#include "ExceptionHandler.h"
 
 Account::Account(int accId, int balance, String name)
 	: accId(accId), balance(balance)
@@ -11,8 +12,13 @@ int Account::GetAccId() const  //계좌ID 반환
 	return accId;
 }
 
-int Account::GetMoney(int money)  //출금
+int Account::GetMoney(int money) throw (WithdrawException)  //출금
 {
+	if (this->balance < money)
+	{
+		WithdrawException extp(money - (this->balance));
+		throw extp;
+	}
 	this->balance -= money;
 	return balance;
 }

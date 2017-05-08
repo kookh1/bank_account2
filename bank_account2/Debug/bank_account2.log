@@ -1,6 +1,9 @@
-﻿  AccountHandler.cpp
+﻿  BankingSystemMain.cpp
+  AccountHandler.cpp
 c:\users\koo\desktop\bank_account2\bank_account2\normalaccount.h(26): warning C4290: 함수가 __declspec(nothrow)가 아님을 나타내려는 경우를 제외하고 C++ 예외 사양은 무시됩니다.
 c:\users\koo\desktop\bank_account2\bank_account2\highcreditaccount.h(35): warning C4290: 함수가 __declspec(nothrow)가 아님을 나타내려는 경우를 제외하고 C++ 예외 사양은 무시됩니다.
+  Account.cpp
+c:\users\koo\desktop\bank_account2\bank_account2\account.cpp(15): warning C4290: 함수가 __declspec(nothrow)가 아님을 나타내려는 경우를 제외하고 C++ 예외 사양은 무시됩니다.
   코드를 생성하고 있습니다...
   건너뛰고 있습니다... (관련된 변경 내용 없음)
   BoundCheckArray.h
