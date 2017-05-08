@@ -34,7 +34,7 @@ public:
 
 	virtual void SetMoney(int money)   //입금
 	{
-		Account::SetMoney(money + money*(GetRatio() + specialRatio)*0.01);
+		Account::SetMoney(money + int(money*(GetRatio() + specialRatio)*0.01));
 		//입금 + (입금 * (이자율+추가이자율))
 	}
 };
