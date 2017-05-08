@@ -136,7 +136,7 @@ void AccountHandler::Deposit()
 		}
 		cout << "해당 계좌ID가 존재하지 않습니다." << endl;
 	}
-	catch (DepositException expt)
+	catch (DepositException &expt)
 	{
 		expt.ShowExceptionReason();
 	}
@@ -169,11 +169,11 @@ void AccountHandler::Withdraw()
 		}
 		cout << "해당 계좌ID가 존재하지 않습니다." << endl;
 	}
-	catch (WithdrawException expt)
+	catch (WithdrawException &expt)
 	{
 		expt.ShowExceptionReason();
 	}
-	catch (DepositException expt)
+	catch (DepositException &expt)
 	{
 		expt.ShowExceptionReason();
 	}
