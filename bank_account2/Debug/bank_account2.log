@@ -1,7 +1,5 @@
-﻿  BankingSystemMain.cpp
-  AccountHandler.cpp
+﻿  AccountHandler.cpp
 c:\users\koo\desktop\bank_account2\bank_account2\normalaccount.h(27): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\koo\desktop\bank_account2\bank_account2\highcreditaccount.h(24): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다...
+c:\users\koo\desktop\bank_account2\bank_account2\highcreditaccount.h(37): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   bank_account2.vcxproj -> C:\Users\koo\Desktop\bank_account2\Debug\bank_account2.exe
   bank_account2.vcxproj -> C:\Users\koo\Desktop\bank_account2\Debug\bank_account2.pdb (Full PDB)
