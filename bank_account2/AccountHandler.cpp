@@ -173,6 +173,10 @@ void AccountHandler::Withdraw()
 	{
 		expt.ShowExceptionReason();
 	}
+	catch (DepositException expt)
+	{
+		expt.ShowExceptionReason();
+	}
 }
 
 

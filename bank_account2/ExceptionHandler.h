@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-class DepositException
+class DepositException  //입금액이 0보다 작은 경우
 {
 private:
 	int reqDep;		// 요청 입금액
@@ -17,7 +17,7 @@ public:
 	}
 };
 
-class WithdrawException
+class WithdrawException  //출금액이 잔고보다 부족
 {
 private:
 	int	balance;	// 잔고

@@ -19,6 +19,12 @@ int Account::GetMoney(int money) throw (WithdrawException)  //Ãâ±Ý
 		WithdrawException extp(money - (this->balance));
 		throw extp;
 	}
+	
+	if (money < 0)
+	{
+		DepositException extp(money);
+		throw extp;
+	}
 	this->balance -= money;
 	return balance;
 }
