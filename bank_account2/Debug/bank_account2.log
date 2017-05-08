@@ -1,13 +1,7 @@
-﻿  Account.cpp
-c:\users\koo\desktop\bank_account2\bank_account2\account.h(24): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: 'strcpy' 선언을 참조하십시오.
-c:\users\koo\desktop\bank_account2\bank_account2\account.cpp(7): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: 'strcpy' 선언을 참조하십시오.
-c:\users\koo\desktop\bank_account2\bank_account2\account.cpp(14): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: 'strcpy' 선언을 참조하십시오.
-  코드를 생성하고 있습니다...
-  건너뛰고 있습니다... (관련된 변경 내용 없음)
-  BankingSystemMain.cpp
+﻿  BankingSystemMain.cpp
   AccountHandler.cpp
+c:\users\koo\desktop\bank_account2\bank_account2\normalaccount.h(27): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\koo\desktop\bank_account2\bank_account2\highcreditaccount.h(24): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
   bank_account2.vcxproj -> C:\Users\koo\Desktop\bank_account2\Debug\bank_account2.exe
   bank_account2.vcxproj -> C:\Users\koo\Desktop\bank_account2\Debug\bank_account2.pdb (Full PDB)
