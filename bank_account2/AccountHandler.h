@@ -2,13 +2,13 @@
 #define __ACCOUNT_HANDLER_H__
 
 #include "Account.h"
-#include "AccountArray.h"
+#include "BoundCheckArray.h"
 
 /*계좌정보 처리 클래스*/
 class AccountHandler
 {
 private:
-	BoundCheckAccountPtrArray accArr;  //고객 계좌정보 저장 포인터 객체 배열
+	BoundCheckArray<Account*> accArr;  //고객 계좌정보 저장 포인터 객체 배열
 	int accNum = 0;                //계좌 개수
 
 public:
