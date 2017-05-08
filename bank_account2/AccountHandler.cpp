@@ -56,7 +56,8 @@ void AccountHandler::MakeNormalAccount()
 	cout << "°èÁÂID: ";
 	cin >> accID;
 
-	char name[NAME_LEN];
+	//char name[NAME_LEN];
+	String name;
 	cout << "ÀÌ¸§: ";
 	cin >> name;
 
@@ -79,7 +80,8 @@ void AccountHandler::MakeCreditAccount()
 	cout << "°èÁÂID: ";
 	cin >> accID;
 
-	char name[NAME_LEN];
+	//char name[NAME_LEN];
+	String name;
 	cout << "ÀÌ¸§: ";
 	cin >> name;
 
