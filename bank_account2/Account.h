@@ -2,6 +2,7 @@
 #define __ACCOUNT_H__
 
 #include "BankingCommonDecl.h"
+#include "String.h"
 
 /*고객 계좌정보 클래스*/
 class Account
@@ -9,13 +10,14 @@ class Account
 private:
 	int accId;   //계좌번호
 	int balance; //잔액
-	char *name;  //이름
+	//char *name;  //이름
+	String name;
 
 public:
-	Account(int accId, int balance, char *name);
-	Account(const Account& ref);
-	Account& operator=(const Account& ref);  
-	~Account();
+	Account(int accId, int balance, String name);
+	//Account(const Account& ref);
+	//Account& operator=(const Account& ref);  
+	//~Account();
 	
 	int GetAccId() const;     //계좌ID 반환
 	int GetMoney(int money);  //출금

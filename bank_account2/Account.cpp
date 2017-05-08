@@ -1,12 +1,14 @@
 #include "Account.h"
 
-Account::Account(int accId, int balance, char *name)
+Account::Account(int accId, int balance, String name)
 	: accId(accId), balance(balance)
 {
-	this->name = new char[strlen(name) + 1];
-	strcpy(this->name, name);
+	this->name = name;
+	//this->name = new char[strlen(name) + 1];
+	//strcpy(this->name, name);
 }
 
+/*
 Account::Account(const Account& ref)
 	:accId(ref.accId), balance(ref.balance)
 {
@@ -29,6 +31,7 @@ Account::~Account()
 {
 	delete[] name;
 }
+*/
 
 int Account::GetAccId() const  //°èÁÂID ¹ÝÈ¯
 {
