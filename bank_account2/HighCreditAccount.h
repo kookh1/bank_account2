@@ -16,7 +16,20 @@ public:
 	virtual void ShowAccount() const  //계좌정보 출력
 	{
 		NormalAccount::ShowAccount();
-		cout << "신용등급(1toA, 2toB, 3toC): " << specialRatio << endl << endl;
+		char creditLevel;
+		switch (specialRatio)   //추가 이율 -> 신용등급
+		{
+		case 7:
+			creditLevel = 'A';
+			break;
+		case 4:
+			creditLevel = 'B';
+			break;
+		case 2:
+			creditLevel = 'C';
+			break;
+		}
+		cout << "신용등급(1toA, 2toB, 3toC): " << creditLevel << endl << endl;
 	}
 
 	virtual void SetMoney(int money)   //입금

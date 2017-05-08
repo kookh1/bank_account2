@@ -14,8 +14,9 @@ private:
 public:
 	Account(int accId, int balance, char *name);
 	Account(const Account& ref);
+	Account& operator=(const Account& ref);  
 	~Account();
-
+	
 	int GetAccId() const;     //계좌ID 반환
 	int GetMoney(int money);  //출금
 	virtual void SetMoney(int money) = 0; //입금
