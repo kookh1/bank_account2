@@ -19,7 +19,6 @@ int Account::GetMoney(int money)  //출금
 
 void Account::SetMoney(int money)  //입금
 {
-	
 	this->balance += money;
 }
 

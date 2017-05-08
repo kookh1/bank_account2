@@ -2,6 +2,7 @@
 #define __NORMAL_ACCOUNT_H__
 
 #include "Account.h"
+#include "ExceptionHandler.h"
 
 /*보통계좌정보 클래스*/
 class NormalAccount : public Account
@@ -22,8 +23,13 @@ public:
 		cout << "이자율: " << interestRatio << endl;
 	}
 
-	virtual void SetMoney(int money)   //입금
+	virtual void SetMoney(int money) throw (DepositException)  //입금
 	{
+		if (money < 0)
+		{
+			DepositException expt(money);
+			throw expt;
+		}
 		Account::SetMoney(money + int(money*interestRatio*0.01));
 		//입금 + (입금 * 이자율)
 	}

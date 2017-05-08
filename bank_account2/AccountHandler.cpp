@@ -1,7 +1,7 @@
 #include "AccountHandler.h"
 #include "NormalAccount.h"
 #include "HighCreditAccount.h"
-
+#include "ExceptionHandler.h"
 
 //empty
 AccountHandler::AccountHandler()
@@ -120,8 +120,8 @@ void AccountHandler::Deposit()
 	cout << "계좌ID: ";
 	cin >> accID;
 
-
-
+	try
+	{
 		for (int i = 0; i < accNum; i++)
 		{
 			if (accArr[i]->GetAccId() == accID)
@@ -129,13 +129,17 @@ void AccountHandler::Deposit()
 				int money;  //입금액
 				cout << "입금액: ";
 				cin >> money;
-				accArr[i]->SetMoney(money);
+				accArr[i]->SetMoney(money);   //예외 발생
 				cout << "입금완료" << endl;
 				return;
 			}
 		}
 		cout << "해당 계좌ID가 존재하지 않습니다." << endl;
-
+	}
+	catch (DepositException expt)
+	{
+		expt.ShowExceptionReason();
+	}
 
 }
 
