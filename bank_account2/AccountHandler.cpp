@@ -1,6 +1,7 @@
 #include "AccountHandler.h"
 #include "NormalAccount.h"
 #include "HighCreditAccount.h"
+#include "ExceptionHandler.h"
 
 //empty
 AccountHandler::AccountHandler()
@@ -56,7 +57,6 @@ void AccountHandler::MakeNormalAccount()
 	cout << "계좌ID: ";
 	cin >> accID;
 
-	//char name[NAME_LEN];
 	String name;
 	cout << "이름: ";
 	cin >> name;
@@ -80,7 +80,6 @@ void AccountHandler::MakeCreditAccount()
 	cout << "계좌ID: ";
 	cin >> accID;
 
-	//char name[NAME_LEN];
 	String name;
 	cout << "이름: ";
 	cin >> name;
@@ -121,19 +120,27 @@ void AccountHandler::Deposit()
 	cout << "계좌ID: ";
 	cin >> accID;
 
-	for (int i = 0; i < accNum; i++)
+	try
 	{
-		if (accArr[i]->GetAccId() == accID)
+		for (int i = 0; i < accNum; i++)
 		{
-			int money;  //입금액
-			cout << "입금액: ";
-			cin >> money;
-			accArr[i]->SetMoney(money);
-			cout << "입금완료" << endl;
-			return;
+			if (accArr[i]->GetAccId() == accID)
+			{
+				int money;  //입금액
+				cout << "입금액: ";
+				cin >> money;
+				accArr[i]->SetMoney(money);   //예외 발생 가능성
+				cout << "입금완료" << endl;
+				return;
+			}
 		}
+		cout << "해당 계좌ID가 존재하지 않습니다." << endl;
 	}
-	cout << "해당 계좌ID가 존재하지 않습니다." << endl;
+	catch (DepositException expt)
+	{
+		expt.ShowExceptionReason();
+	}
+
 }
 
 
@@ -146,19 +153,26 @@ void AccountHandler::Withdraw()
 	cout << "계좌ID: ";
 	cin >> accID;
 
-	for (int i = 0; i < accNum; i++)
+	try
 	{
-		if (accArr[i]->GetAccId() == accID)
+		for (int i = 0; i < accNum; i++)
 		{
-			int money;  //출금액
-			cout << "출금액: ";
-			cin >> money;
-			accArr[i]->GetMoney(money);
-			cout << "출금완료" << endl;
-			return;
+			if (accArr[i]->GetAccId() == accID)
+			{
+				int money;  //출금액
+				cout << "출금액: ";
+				cin >> money;
+				accArr[i]->GetMoney(money);   //예외 발생 가능성
+				cout << "출금완료" << endl;
+				return;
+			}
 		}
+		cout << "해당 계좌ID가 존재하지 않습니다." << endl;
 	}
-	cout << "해당 계좌ID가 존재하지 않습니다." << endl;
+	catch (WithdrawException expt)
+	{
+		expt.ShowExceptionReason();
+	}
 }
 
 

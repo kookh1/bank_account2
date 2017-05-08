@@ -32,9 +32,14 @@ public:
 		cout << "신용등급(1toA, 2toB, 3toC): " << creditLevel << endl << endl;
 	}
 
-	virtual void SetMoney(int money)   //입금
+	virtual void SetMoney(int money) throw (DepositException)  //입금
 	{
-		Account::SetMoney(money + money*(GetRatio() + specialRatio)*0.01);
+		if (money < 0)
+		{
+			DepositException expt(money);
+			throw expt;
+		}
+		Account::SetMoney(money + int(money*(GetRatio() + specialRatio)*0.01));
 		//입금 + (입금 * (이자율+추가이자율))
 	}
 };

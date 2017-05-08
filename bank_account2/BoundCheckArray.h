@@ -3,8 +3,6 @@
 
 #include "Account.h"
 
-//typedef Account * ACCOUNT_PTR;
-
 template <class T>
 class BoundCheckArray
 {
