@@ -9,7 +9,7 @@ class NormalAccount : public Account
 private:
 	int interestRatio;  //이자율
 public:
-	NormalAccount(int accId, int balance, char *name, int ratio)
+	NormalAccount(int accId, int balance, String name, int ratio)
 		: Account(accId, balance, name), interestRatio(ratio)
 	{}
 	int GetRatio() const  //이자율 가져오기
